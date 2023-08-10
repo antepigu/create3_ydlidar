@@ -74,14 +74,17 @@ int main(int argc, char *argv[]) {
   laser.setlidaropt(LidarPropDeviceType, &optval, sizeof(int));
   /// sample rate
   ///int optval;
-  node->declare_parameter<int>("sample_rate", 9);
-  node->get_parameter_or<int>("sample_rate", optval, 9);
+  node->declare_parameter<int>("sample_rate", 3);
+  node->get_parameter_or<int>("sample_rate", optval, 3);
   laser.setlidaropt(LidarPropSampleRate, &optval, sizeof(int));
   /// abnormal count
   ///int optval;
   node->declare_parameter<int>("abnormal_check_count", 4);
   node->get_parameter_or<int>("abnormal_check_count", optval, 4);
   laser.setlidaropt(LidarPropAbnormalCheckCount, &optval, sizeof(int));
+  /// Intenstiy bit count
+  optval = 8;
+  laser.setlidaropt(LidarPropIntenstiyBit, &optval, sizeof(int));
      
 
   //////////////////////bool property/////////////////
@@ -90,15 +93,19 @@ int main(int argc, char *argv[]) {
   node->declare_parameter<bool>("fixed_resolution", false);
   node->get_parameter_or<bool>("fixed_resolution", b_optvalue, false);
   laser.setlidaropt(LidarPropFixedResolution, &b_optvalue, sizeof(bool));
+
+  /// HeartBeat
+  laser.setlidaropt(LidarPropSupportHeartBeat, &b_optvalue, sizeof(bool));
+
   /// rotate 180
   ///bool b_optvalue;
-  node->declare_parameter<bool>("reversion", true);
-  node->get_parameter_or<bool>("reversion", b_optvalue, true);
+  node->declare_parameter<bool>("reversion", false);
+  node->get_parameter_or<bool>("reversion", b_optvalue, false);
   laser.setlidaropt(LidarPropReversion, &b_optvalue, sizeof(bool));
   /// Counterclockwise
   ///bool b_optvalue;
-  node->declare_parameter<bool>("inverted", true);
-  node->get_parameter_or<bool>("inverted", b_optvalue, true);
+  node->declare_parameter<bool>("inverted", false);
+  node->get_parameter_or<bool>("inverted", b_optvalue, false);
   laser.setlidaropt(LidarPropInverted, &b_optvalue, sizeof(bool));
   ///bool b_optvalue;
   node->declare_parameter<bool>("auto_reconnect", true);
@@ -106,18 +113,18 @@ int main(int argc, char *argv[]) {
   laser.setlidaropt(LidarPropAutoReconnect, &b_optvalue, sizeof(bool));
   /// one-way communication
   ///bool b_optvalue;
-  node->declare_parameter<bool>("isSingleChannel", false);
-  node->get_parameter_or<bool>("isSingleChannel", b_optvalue, false);
+  node->declare_parameter<bool>("isSingleChannel", true);
+  node->get_parameter_or<bool>("isSingleChannel", b_optvalue, true);
   laser.setlidaropt(LidarPropSingleChannel, &b_optvalue, sizeof(bool));
   /// intensity
   ///bool b_optvalue;
-  node->declare_parameter<bool>("intensity", false);
-  node->get_parameter_or<bool>("intensity", b_optvalue, false);
+  node->declare_parameter<bool>("intensity", true);
+  node->get_parameter_or<bool>("intensity", b_optvalue, true);
   laser.setlidaropt(LidarPropIntenstiy, &b_optvalue, sizeof(bool));
   /// Motor DTR
   ///bool b_optvalue;
-  node->declare_parameter<bool>("support_motor_dtr", false);
-  node->get_parameter_or<bool>("support_motor_dtr", b_optvalue, false);
+  node->declare_parameter<bool>("support_motor_dtr", true);
+  node->get_parameter_or<bool>("support_motor_dtr", b_optvalue, true);
   laser.setlidaropt(LidarPropSupportMotorDtrCtrl, &b_optvalue, sizeof(bool));
 
   //////////////////////float property/////////////////
@@ -136,18 +143,22 @@ int main(int argc, char *argv[]) {
   node->get_parameter_or<float>("range_max", f_optvalue, 64.f);
   laser.setlidaropt(LidarPropMaxRange, &f_optvalue, sizeof(float));
   ///f_optvalue;
-  node->declare_parameter<float>("range_min", 0.1f);
-  node->get_parameter_or<float>("range_min", f_optvalue, 0.1f);
+  node->declare_parameter<float>("range_min", 0.5f);
+  node->get_parameter_or<float>("range_min", f_optvalue, 0.5f);
   laser.setlidaropt(LidarPropMinRange, &f_optvalue, sizeof(float));
   /// unit: Hz
   ///f_optvalue = 10.f;
-  node->declare_parameter<float>("frequency", 10.f);
-  node->get_parameter_or<float>("frequency", f_optvalue, 10.f);
+  node->declare_parameter<float>("frequency", 8.f);
+  node->get_parameter_or<float>("frequency", f_optvalue, 8.f);
   laser.setlidaropt(LidarPropScanFrequency, &f_optvalue, sizeof(float));
 
   bool invalid_range_is_inf;
   node->declare_parameter<bool>("invalid_range_is_inf", false);
   node->get_parameter_or<bool>("invalid_range_is_inf", invalid_range_is_inf, false);
+
+  //禁用阳光玻璃过滤
+  laser.enableGlassNoise(false);
+  laser.enableSunNoise(false);
 
 
   bool ret = laser.initialize();
