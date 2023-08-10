@@ -99,13 +99,13 @@ int main(int argc, char *argv[]) {
 
   /// rotate 180
   ///bool b_optvalue;
-  node->declare_parameter<bool>("reversion", false);
-  node->get_parameter_or<bool>("reversion", b_optvalue, false);
+  node->declare_parameter<bool>("reversion", true);
+  node->get_parameter_or<bool>("reversion", b_optvalue, true);
   laser.setlidaropt(LidarPropReversion, &b_optvalue, sizeof(bool));
   /// Counterclockwise
   ///bool b_optvalue;
-  node->declare_parameter<bool>("inverted", false);
-  node->get_parameter_or<bool>("inverted", b_optvalue, false);
+  node->declare_parameter<bool>("inverted", true);
+  node->get_parameter_or<bool>("inverted", b_optvalue, true);
   laser.setlidaropt(LidarPropInverted, &b_optvalue, sizeof(bool));
   ///bool b_optvalue;
   node->declare_parameter<bool>("auto_reconnect", true);
