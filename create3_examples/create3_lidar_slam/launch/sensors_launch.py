@@ -61,6 +61,7 @@ def generate_launch_description():
     
     # Launches all named actions
     return LaunchDescription([
+        params_declare,
         namespace_argument,
         static_transform_node,
         TimerAction(
