@@ -231,7 +231,7 @@ int main(int argc, char *argv[]) {
     if(!rclcpp::ok()) {
       break;
     }
-    rclcpp::spin(node);
+    ///rclcpp::spin_some(node);
     loop_rate.sleep();
   }
 
