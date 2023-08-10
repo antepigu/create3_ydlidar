@@ -47,7 +47,7 @@ int main(int argc, char *argv[]) {
   laser.setlidaropt(LidarPropSerialPort, str_optvalue.c_str(), str_optvalue.size());
 
   ///ignore array
-  std::string str_optvalue;
+  ///std::string str_optvalue;
   node->declare_parameter<std::string>("ignore_array", "");
   node->get_parameter_or<std::string>("ignore_array", str_optvalue, "");
   laser.setlidaropt(LidarPropIgnoreArray, str_optvalue.c_str(), str_optvalue.size());
