@@ -63,22 +63,22 @@ int main(int argc, char *argv[]) {
   node->get_parameter_or<int>("baudrate", optval, 230400);
   laser.setlidaropt(LidarPropSerialBaudrate, &optval, sizeof(int));
   /// tof lidar
-  int optval;
+  ///int optval;
   node->declare_parameter<int>("lidar_type", TYPE_TRIANGLE);
   node->get_parameter_or<int>("lidar_type", optval, TYPE_TRIANGLE);
   laser.setlidaropt(LidarPropLidarType, &optval, sizeof(int));
   /// device type
-  int optval;
+  ///int optval;
   node->declare_parameter<int>("device_type", YDLIDAR_TYPE_SERIAL);
   node->get_parameter_or<int>("device_type", optval, YDLIDAR_TYPE_SERIAL);
   laser.setlidaropt(LidarPropDeviceType, &optval, sizeof(int));
   /// sample rate
-  int optval;
+  ///int optval;
   node->declare_parameter<int>("sample_rate", 9);
   node->get_parameter_or<int>("sample_rate", optval, 9);
   laser.setlidaropt(LidarPropSampleRate, &optval, sizeof(int));
   /// abnormal count
-  int optval;
+  ///int optval;
   node->declare_parameter<int>("abnormal_check_count", 4);
   node->get_parameter_or<int>("abnormal_check_count", optval, 4);
   laser.setlidaropt(LidarPropAbnormalCheckCount, &optval, sizeof(int));
