@@ -74,8 +74,8 @@ int main(int argc, char *argv[]) {
   laser.setlidaropt(LidarPropDeviceType, &optval, sizeof(int));
   /// sample rate
   ///int optval;
-  node->declare_parameter<int>("sample_rate", 3);
-  node->get_parameter_or<int>("sample_rate", optval, 3);
+  node->declare_parameter<int>("sample_rate", 9);
+  node->get_parameter_or<int>("sample_rate", optval, 9);
   laser.setlidaropt(LidarPropSampleRate, &optval, sizeof(int));
   /// abnormal count
   ///int optval;
