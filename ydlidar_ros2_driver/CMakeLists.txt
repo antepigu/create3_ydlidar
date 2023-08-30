@@ -49,10 +49,10 @@ ament_target_dependencies(${PROJECT_NAME}_node
     "visualization_msgs"
     "geometry_msgs"
     "std_srvs"
+    "ydlidar_compensator"
     )
 
 target_link_libraries(${PROJECT_NAME}_node
-    ydlidar_compensator
     ${YDLIDAR_SDK_LIBRARIES})
 
 #---------------------------------------------------------------------------------------
