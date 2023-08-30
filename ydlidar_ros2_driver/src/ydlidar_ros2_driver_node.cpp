@@ -90,8 +90,8 @@ int main(int argc, char *argv[]) {
   //////////////////////bool property/////////////////
   /// fixed angle resolution
   bool b_optvalue;
-  node->declare_parameter<bool>("fixed_resolution", false);
-  node->get_parameter_or<bool>("fixed_resolution", b_optvalue, false);
+  node->declare_parameter<bool>("fixed_resolution", true);
+  node->get_parameter_or<bool>("fixed_resolution", b_optvalue, true);
   laser.setlidaropt(LidarPropFixedResolution, &b_optvalue, sizeof(bool));
 
   /// HeartBeat
@@ -113,8 +113,8 @@ int main(int argc, char *argv[]) {
   laser.setlidaropt(LidarPropAutoReconnect, &b_optvalue, sizeof(bool));
   /// one-way communication
   ///bool b_optvalue;
-  node->declare_parameter<bool>("isSingleChannel", true);
-  node->get_parameter_or<bool>("isSingleChannel", b_optvalue, true);
+  node->declare_parameter<bool>("isSingleChannel", false);
+  node->get_parameter_or<bool>("isSingleChannel", b_optvalue, false);
   laser.setlidaropt(LidarPropSingleChannel, &b_optvalue, sizeof(bool));
   /// intensity
   ///bool b_optvalue;
@@ -123,8 +123,8 @@ int main(int argc, char *argv[]) {
   laser.setlidaropt(LidarPropIntenstiy, &b_optvalue, sizeof(bool));
   /// Motor DTR
   ///bool b_optvalue;
-  node->declare_parameter<bool>("support_motor_dtr", true);
-  node->get_parameter_or<bool>("support_motor_dtr", b_optvalue, true);
+  node->declare_parameter<bool>("support_motor_dtr", false);
+  node->get_parameter_or<bool>("support_motor_dtr", b_optvalue, false);
   laser.setlidaropt(LidarPropSupportMotorDtrCtrl, &b_optvalue, sizeof(bool));
 
   //////////////////////float property/////////////////
@@ -148,8 +148,8 @@ int main(int argc, char *argv[]) {
   laser.setlidaropt(LidarPropMinRange, &f_optvalue, sizeof(float));
   /// unit: Hz
   ///f_optvalue = 10.f;
-  node->declare_parameter<float>("frequency", 8.f);
-  node->get_parameter_or<float>("frequency", f_optvalue, 8.f);
+  node->declare_parameter<float>("frequency", 10.f);
+  node->get_parameter_or<float>("frequency", f_optvalue, 10.f);
   laser.setlidaropt(LidarPropScanFrequency, &f_optvalue, sizeof(float));
 
   bool invalid_range_is_inf;
@@ -171,7 +171,7 @@ int main(int argc, char *argv[]) {
   auto laser_pub = node->create_publisher<sensor_msgs::msg::LaserScan>("r1/scan", 100);
 
   auto stop_scan_service =
-    [&laser](const std::shared_ptr<rmw_request_id_t> request_header,
+    [&laser](const std::shared_ptr<rmw_request_id_t> request_header,invalid_range_is_inf
   const std::shared_ptr<std_srvs::srv::Empty::Request> req,
   std::shared_ptr<std_srvs::srv::Empty::Response> response) -> bool
   {
