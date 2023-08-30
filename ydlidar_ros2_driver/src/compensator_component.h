@@ -53,7 +53,7 @@ class CompensatorComponent {
    * @brief Laser Scan data message callback function
    * @param scan Laser scan data
    */
-  void LaserScanMsgCallback(const LaserScan &scan);
+  LaserScan LaserScanMsgCallback(const LaserScan &scan);
 
  private:
   /**
