@@ -172,7 +172,7 @@ int main(int argc, char *argv[]) {
   auto laser_pub = node->create_publisher<sensor_msgs::msg::LaserScan>("r1/scan", 100);
 
   auto stop_scan_service =
-    [&laser](const std::shared_ptr<rmw_request_id_t> request_header,invalid_range_is_inf
+    [&laser](const std::shared_ptr<rmw_request_id_t> request_header,
   const std::shared_ptr<std_srvs::srv::Empty::Request> req,
   std::shared_ptr<std_srvs::srv::Empty::Response> response) -> bool
   {
