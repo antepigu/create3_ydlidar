@@ -11,6 +11,8 @@ if(CMAKE_COMPILER_IS_GNUCXX OR CMAKE_CXX_COMPILER_ID MATCHES "Clang")
   add_compile_options(-Wall -Wextra -Wpedantic)
 endif()
 
+find_package(ament_cmake REQUIRED)
+
 #Include directories
 include_directories(
      ${CMAKE_SOURCE_DIR}
@@ -24,4 +26,4 @@ add_subdirectory(examples)
 #add library
 add_library(${PROJECT_NAME} ${HDRS} ${SRCS} ${MATRIX_HDRS})
 
-
+ament_package()
