@@ -1,7 +1,16 @@
-cmake_minimum_required(VERSION 2.8)
-PROJECT(ydlidar_compensator)
-set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -std=c++11")
-add_definitions(-std=c++11) # Use C++11
+# Copyright(c) 2020 eaibot limited.
+cmake_minimum_required(VERSION 3.5)
+project(ydlidar_compensator C CXX)
+
+##################ros2#############################################
+# Default to C++14
+if(NOT CMAKE_CXX_STANDARD)
+  set(CMAKE_CXX_STANDARD 14)
+endif()
+if(CMAKE_COMPILER_IS_GNUCXX OR CMAKE_CXX_COMPILER_ID MATCHES "Clang")
+  add_compile_options(-Wall -Wextra -Wpedantic)
+endif()
+
 #Include directories
 include_directories(
      ${CMAKE_SOURCE_DIR}
