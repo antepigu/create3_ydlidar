@@ -28,6 +28,7 @@
 #include <iostream>
 #include <string>
 #include <signal.h>
+#include "compensator_component.h"
 
 #define ROS2Verision "1.0.1"
 
@@ -194,11 +195,13 @@ int main(int argc, char *argv[]) {
 
   while (ret && rclcpp::ok()) {
 
+    ydlidar::drivers::CompensatorComponent compensator_component;
     LaserScan scan;//
 
     if (laser.doProcessSimple(scan)) {
 
       auto scan_msg = std::make_shared<sensor_msgs::msg::LaserScan>();
+      compensator_component.LaserScanMsgCallback(scan);
 
       scan_msg->header.stamp.sec = RCL_NS_TO_S(scan.stamp);
       scan_msg->header.stamp.nanosec =  scan.stamp - RCL_S_TO_NS(scan_msg->header.stamp.sec);
