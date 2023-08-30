@@ -19,6 +19,7 @@ find_package(sensor_msgs REQUIRED)
 find_package(visualization_msgs REQUIRED)
 find_package(geometry_msgs REQUIRED)
 find_package(std_srvs REQUIRED)
+find_package(ydlidar_compensator REQUIRED)
 
 ############## YDLIDAR SDK START#####################################
 #find ydlidar_sdk package
@@ -51,6 +52,7 @@ ament_target_dependencies(${PROJECT_NAME}_node
     )
 
 target_link_libraries(${PROJECT_NAME}_node
+    ydlidar_compensator
     ${YDLIDAR_SDK_LIBRARIES})
 
 #---------------------------------------------------------------------------------------
