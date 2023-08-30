@@ -51,12 +51,13 @@ bool CompensatorComponent::Init() {
   return true;
 }
 
-void CompensatorComponent::LaserScanMsgCallback(const LaserScan &scan) {
+LaserScan CompensatorComponent::LaserScanMsgCallback(const LaserScan &scan) {
   LaserScan scan_compensated;
 
   if (compensator_->MotionCompensation(scan, scan_compensated)) {
     seq_++;
   }
+  return scan_compensated;
 }
 
 void CompensatorComponent::OdometryMsgCallback(const odometry_t &odom) {
