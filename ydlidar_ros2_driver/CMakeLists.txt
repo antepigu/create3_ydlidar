@@ -73,9 +73,6 @@ ament_target_dependencies(${PROJECT_NAME}_client
 FILE(GLOB SRCS "*.cpp")
 FILE(GLOB HDRS "*.h")
 
-#add executable
-add_executable(${PROJECT_NAME} ${HDRS} ${SRCS})
-
 #Link project to ydlidar_sdk library.
 target_link_libraries(${PROJECT_NAME} ydlidar_compensator ${YDLIDAR_SDK_LIBRARIES})
 
