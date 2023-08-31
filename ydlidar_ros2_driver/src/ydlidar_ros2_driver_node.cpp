@@ -195,7 +195,7 @@ int main(int argc, char *argv[]) {
 
   while (ret && rclcpp::ok()) {
 
-    ydlidar::drivers::CompensatorComponent compensator_component;
+    ydlidar::drivers::CompensatorComponent compensator_component = ydlidar::drivers::CompensatorComponent();
     LaserScan scan;//
 
     if (laser.doProcessSimple(scan)) {

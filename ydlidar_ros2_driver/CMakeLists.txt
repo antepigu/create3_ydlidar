@@ -19,7 +19,6 @@ find_package(sensor_msgs REQUIRED)
 find_package(visualization_msgs REQUIRED)
 find_package(geometry_msgs REQUIRED)
 find_package(std_srvs REQUIRED)
-find_package(ydlidar_compensator REQUIRED)
 
 ############## YDLIDAR SDK START#####################################
 #find ydlidar_sdk package
@@ -35,6 +34,11 @@ include_directories(
 #link library directories
 link_directories(${YDLIDAR_SDK_LIBRARY_DIRS})
 
+add_library(library SHARED
+    src/compensator_component.cpp
+    src/compensator.cpp
+)
+
 #---------------------------------------------------------------------------------------
 # generate excutable and add libraries
 #---------------------------------------------------------------------------------------
@@ -49,10 +53,10 @@ ament_target_dependencies(${PROJECT_NAME}_node
     "visualization_msgs"
     "geometry_msgs"
     "std_srvs"
-    "ydlidar_compensator"
     )
 
 target_link_libraries(${PROJECT_NAME}_node
+    library
     ${YDLIDAR_SDK_LIBRARIES})
 
 #---------------------------------------------------------------------------------------
@@ -74,6 +78,12 @@ ament_target_dependencies(${PROJECT_NAME}_client
 #---------------------------------------------------------------------------------------
 # Install
 #---------------------------------------------------------------------------------------
+install(TARGETS library
+    ARCHIVE DESTINATION lib
+    LIBRARY DESTINATION lib
+    RUNTIME DESTINATION bin
+)
+
 install(TARGETS
     ${PROJECT_NAME}_node ${PROJECT_NAME}_client
     DESTINATION lib/${PROJECT_NAME})
