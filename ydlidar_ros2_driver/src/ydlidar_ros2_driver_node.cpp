@@ -75,8 +75,8 @@ int main(int argc, char *argv[]) {
   laser.setlidaropt(LidarPropDeviceType, &optval, sizeof(int));
   /// sample rate
   ///int optval;
-  node->declare_parameter<int>("sample_rate", 9);
-  node->get_parameter_or<int>("sample_rate", optval, 9);
+  node->declare_parameter<int>("sample_rate", 4);
+  node->get_parameter_or<int>("sample_rate", optval, 4);
   laser.setlidaropt(LidarPropSampleRate, &optval, sizeof(int));
   /// abnormal count
   ///int optval;
@@ -149,8 +149,8 @@ int main(int argc, char *argv[]) {
   laser.setlidaropt(LidarPropMinRange, &f_optvalue, sizeof(float));
   /// unit: Hz
   ///f_optvalue = 10.f;
-  node->declare_parameter<float>("frequency", 10.f);
-  node->get_parameter_or<float>("frequency", f_optvalue, 10.f);
+  node->declare_parameter<float>("frequency", 6.f);
+  node->get_parameter_or<float>("frequency", f_optvalue, 6.f);
   laser.setlidaropt(LidarPropScanFrequency, &f_optvalue, sizeof(float));
 
   bool invalid_range_is_inf;
@@ -201,27 +201,27 @@ int main(int argc, char *argv[]) {
     if (laser.doProcessSimple(scan)) {
 
       auto scan_msg = std::make_shared<sensor_msgs::msg::LaserScan>();
-      LaserScan scan_comp = compensator_component.LaserScanMsgCallback(scan);
+      //LaserScan scan_comp = compensator_component.LaserScanMsgCallback(scan);
 
-      scan_msg->header.stamp.sec = RCL_NS_TO_S(scan_comp.stamp);
-      scan_msg->header.stamp.nanosec =  scan_comp.stamp - RCL_S_TO_NS(scan_msg->header.stamp.sec);
+      scan_msg->header.stamp.sec = RCL_NS_TO_S(scan.stamp);
+      scan_msg->header.stamp.nanosec =  scan.stamp - RCL_S_TO_NS(scan_msg->header.stamp.sec);
       scan_msg->header.frame_id = frame_id;
-      scan_msg->angle_min = scan_comp.config.min_angle;
-      scan_msg->angle_max = scan_comp.config.max_angle;
-      scan_msg->angle_increment = scan_comp.config.angle_increment;
-      scan_msg->scan_time = scan_comp.config.scan_time;
-      scan_msg->time_increment = scan_comp.config.time_increment;
-      scan_msg->range_min = scan_comp.config.min_range;
-      scan_msg->range_max = scan_comp.config.max_range;
+      scan_msg->angle_min = scan.config.min_angle;
+      scan_msg->angle_max = scan.config.max_angle;
+      scan_msg->angle_increment = scan.config.angle_increment;
+      scan_msg->scan_time = scan.config.scan_time;
+      scan_msg->time_increment = scan.config.time_increment;
+      scan_msg->range_min = scan.config.min_range;
+      scan_msg->range_max = scan.config.max_range;
       
-      int size = (scan_comp.config.max_angle - scan_comp.config.min_angle)/ scan_comp.config.angle_increment + 1;
+      int size = (scan.config.max_angle - scan.config.min_angle)/ scan.config.angle_increment + 1;
       scan_msg->ranges.resize(size);
       scan_msg->intensities.resize(size);
-      for(size_t i=0; i < scan_comp.points.size(); i++) {
-        int index = std::ceil((scan_comp.points[i].angle - scan_comp.config.min_angle)/scan_comp.config.angle_increment);
+      for(size_t i=0; i < scan.points.size(); i++) {
+        int index = std::ceil((scan.points[i].angle - scan.config.min_angle)/scan.config.angle_increment);
         if(index >=0 && index < size) {
-          scan_msg->ranges[index] = scan_comp.points[i].range;
-          scan_msg->intensities[index] = scan_comp.points[i].intensity;
+          scan_msg->ranges[index] = scan.points[i].range;
+          scan_msg->intensities[index] = scan.points[i].intensity;
         }
       }
 
