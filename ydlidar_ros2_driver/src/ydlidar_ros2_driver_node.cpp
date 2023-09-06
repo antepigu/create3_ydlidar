@@ -96,7 +96,7 @@ int main(int argc, char *argv[]) {
   laser.setlidaropt(LidarPropFixedResolution, &b_optvalue, sizeof(bool));
 
   /// HeartBeat
-  laser.setlidaropt(LidarPropSupportHeartBeat, &b_optvalue, sizeof(bool));
+  //laser.setlidaropt(LidarPropSupportHeartBeat, &b_optvalue, sizeof(bool));
 
   /// rotate 180
   ///bool b_optvalue;
@@ -158,8 +158,8 @@ int main(int argc, char *argv[]) {
   node->get_parameter_or<bool>("invalid_range_is_inf", invalid_range_is_inf, false);
 
   //禁用阳光玻璃过滤
-  laser.enableGlassNoise(false);
-  laser.enableSunNoise(false);
+  //laser.enableGlassNoise(false);
+  //laser.enableSunNoise(false);
 
 
   bool ret = laser.initialize();
@@ -195,7 +195,7 @@ int main(int argc, char *argv[]) {
 
   while (ret && rclcpp::ok()) {
 
-    ydlidar::drivers::CompensatorComponent compensator_component = ydlidar::drivers::CompensatorComponent();
+    //ydlidar::drivers::CompensatorComponent compensator_component = ydlidar::drivers::CompensatorComponent();
     LaserScan scan;//
 
     if (laser.doProcessSimple(scan)) {
