@@ -58,6 +58,11 @@ def generate_launch_description():
         parameters=[parameter_file]#,
         #namespace=namespace
     )
+
+    lidar_node_tmini = ExecuteProcess(
+    	cmd=['ros2', 'launch', 'ydlidar_ros2_drive' 'ydlidar_launch'],
+    	output='screen',
+    )
     
     # Launches all named actions
     return LaunchDescription([
@@ -66,6 +71,6 @@ def generate_launch_description():
         static_transform_node,
         TimerAction(
             period=2.0,
-            actions=[lidar_node]
+            actions=[lidar_node_tmini]
         )
     ])
