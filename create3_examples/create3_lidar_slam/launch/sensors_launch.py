@@ -31,6 +31,7 @@ def generate_launch_description():
                                            default_value=os.path.join(
                                                share_dir, 'params', 'TminiPro.yaml'),
                                            description='Path to the ROS2 parameters file to use.')
+    params_file = os.path.join(share_dir, 'params', 'TminiPro.yaml')
     
     # Declares an action that will launch a node when executed by the launch description.
     # This node is responsible for providing a static transform from the robot's base_footprint
