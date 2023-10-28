@@ -66,8 +66,8 @@ int main(int argc, char *argv[]) {
   laser.setlidaropt(LidarPropSerialBaudrate, &optval, sizeof(int));
   /// tof lidar
   ///int optval;
-  node->declare_parameter<int>("lidar_type", TYPE_TRIANGLE);
-  node->get_parameter_or<int>("lidar_type", optval, TYPE_TRIANGLE);
+  node->declare_parameter<int>("lidar_type", TYPE_TOF);  //TYPE_TRIANGLE
+  node->get_parameter_or<int>("lidar_type", optval, TYPE_TOF);
   laser.setlidaropt(LidarPropLidarType, &optval, sizeof(int));
   /// device type
   ///int optval;
@@ -202,7 +202,7 @@ int main(int argc, char *argv[]) {
     NoiseFilter noiseFilter;
 
     if (laser.doProcessSimple(scanNoise)) {
-      noiseFilter.filter(scanNoise, TYPE_TRIANGLE, TYPE_TRIANGLE, scan);
+      noiseFilter.filter(scanNoise, 0, 0, scan);
       auto scan_msg = std::make_shared<sensor_msgs::msg::LaserScan>();
       //LaserScan scan_comp = compensator_component.LaserScanMsgCallback(scan);
 
