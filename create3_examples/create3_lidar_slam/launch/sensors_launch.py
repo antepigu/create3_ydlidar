@@ -11,7 +11,7 @@ import os
 def lidar_node(context, *args, **kwargs):
 
     share_dir = get_package_share_directory('ydlidar_ros2_driver')
-    namespace = LaunchConfiguration('namespace').perform(context)
+    namespace = LaunchConfiguration('namespace').perform(context).toString()
     node = []
     
     node.append(ExecuteProcess(
