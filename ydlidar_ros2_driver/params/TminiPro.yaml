@@ -5,7 +5,7 @@
       frame_id: r1/laser_frame
       ignore_array: ""
       baudrate: 230400
-      lidar_type: 0
+      lidar_type: 2
       device_type: 0
       sample_rate: 5
       intensity_bit: 8

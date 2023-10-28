@@ -66,8 +66,8 @@ int main(int argc, char *argv[]) {
   laser.setlidaropt(LidarPropSerialBaudrate, &optval, sizeof(int));
   /// tof lidar
   ///int optval;
-  node->declare_parameter<int>("lidar_type", TYPE_TOF);  //TYPE_TRIANGLE
-  node->get_parameter_or<int>("lidar_type", optval, TYPE_TOF);
+  node->declare_parameter<int>("lidar_type", TYPE_TRIANGLE);  //TYPE_TRIANGLE
+  node->get_parameter_or<int>("lidar_type", optval, TYPE_TRIANGLE);
   laser.setlidaropt(LidarPropLidarType, &optval, sizeof(int));
   /// device type
   ///int optval;
