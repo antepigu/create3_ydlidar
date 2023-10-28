@@ -3,11 +3,23 @@
 
 from launch import LaunchDescription
 from launch_ros.actions import Node
-from launch.actions import DeclareLaunchArgument, TimerAction, ExecuteProcess
+from launch.actions import DeclareLaunchArgument, TimerAction, ExecuteProcess, OpaqueFunction
 from launch.substitutions import LaunchConfiguration
 from ament_index_python.packages import get_package_share_directory
 import os
 
+def lidar_node(context, *args, **kwargs):
+
+    share_dir = get_package_share_directory('ydlidar_ros2_driver')
+    namespace = LaunchConfiguration('namespace')
+    node = []
+    
+    node.append(ExecuteProcess(
+    	cmd=['ros2', 'launch', 'ydlidar_ros2_driver', 'ydlidar_launch.py', 'namespace:=' + namespace],
+    	output='screen',
+    ))
+
+    return node
 
 def generate_launch_description():
     # Evaluate at launch the value of the launch configuration 'namespace' 
@@ -72,6 +84,7 @@ def generate_launch_description():
         static_transform_node,
         TimerAction(
             period=2.0,
-            actions=[lidar_node_tmini]
+            #actions=[lidar_node_tmini]
+            actions=[OpaqueFunction(function=lidar_node)]
         )
     ])
