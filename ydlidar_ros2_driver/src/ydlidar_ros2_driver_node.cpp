@@ -169,7 +169,7 @@ int main(int argc, char *argv[]) {
     RCLCPP_ERROR(node->get_logger(), "%s\n", laser.DescribeError());
   }
   
-  auto laser_pub = node->create_publisher<sensor_msgs::msg::LaserScan>("r1/scan", 100);
+  auto laser_pub = node->create_publisher<sensor_msgs::msg::LaserScan>("scan", 100);
 
   auto stop_scan_service =
     [&laser](const std::shared_ptr<rmw_request_id_t> request_header,
