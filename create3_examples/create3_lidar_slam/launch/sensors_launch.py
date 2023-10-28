@@ -71,6 +71,6 @@ def generate_launch_description():
         static_transform_node,
         TimerAction(
             period=2.0,
-            actions=[lidar_node]
+            actions=[lidar_node_tmini]
         )
     ])
