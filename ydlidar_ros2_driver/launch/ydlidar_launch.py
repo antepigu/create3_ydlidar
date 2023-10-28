@@ -30,6 +30,13 @@ def generate_launch_description():
     parameter_file = LaunchConfiguration('params_file')
     node_name = 'ydlidar_ros2_driver_node'
 
+    namespace = LaunchConfiguration('namespace')
+
+    namespace_argument = DeclareLaunchArgument(
+        'namespace', 
+        default_value='r1/',
+        description='Robot namespace')
+
     params_file = os.path.join(share_dir, 'params', 'TminiPro.yaml')
 
     driver_node = LifecycleNode(package='ydlidar_ros2_driver',
@@ -38,7 +45,7 @@ def generate_launch_description():
                                 output='screen',
                                 #emulate_tty=True,
                                 parameters=[params_file],
-                                namespace='/',
+                                namespace=namespace,
                                 )
     # tf2_node = Node(package='tf2_ros',
     #                 executable='static_transform_publisher',
