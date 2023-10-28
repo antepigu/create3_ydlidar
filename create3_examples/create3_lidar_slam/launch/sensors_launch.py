@@ -66,7 +66,7 @@ def generate_launch_description():
     )
 
     lidar_node_tmini = IncludeLaunchDescription(
-            PythonLaunchDescriptionSource(os.path.join(share_dir,
+            PythonLaunchDescriptionSource(os.path.join(share_dir, 'launch',
                                                        'ydlidar_launch.py')),
             launch_arguments={'namespace': namespace,
                               'params_file': params_file}.items())
