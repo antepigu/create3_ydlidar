@@ -23,7 +23,7 @@ def generate_launch_description():
     #Declare directory of the driver
     share_dir = get_package_share_directory('ydlidar_ros2_driver')
     #Evaluate at launch the file of the parameters for the lidar
-    parameter_file = LaunchConfiguration('params_file')
+    #parameter_file = LaunchConfiguration('params_file')
 
     # Declares an action to allow users to pass the name of the file params
     # with a default value for ydlidar tmini.
@@ -55,7 +55,7 @@ def generate_launch_description():
         package='ydlidar_ros2_driver',
         executable='ydlidar_ros2_driver_node',
         output='screen',
-        parameters=[LaunchConfiguration('params_file')],
+        parameters=params_file,
         namespace=namespace
     )
 
