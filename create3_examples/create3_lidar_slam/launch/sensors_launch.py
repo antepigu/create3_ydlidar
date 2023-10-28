@@ -55,8 +55,8 @@ def generate_launch_description():
         package='ydlidar_ros2_driver',
         executable='ydlidar_ros2_driver_node',
         output='screen',
-        parameters=[parameter_file]#,
-        #namespace=namespace
+        parameters=[parameter_file],
+        namespace=namespace
     )
 
     lidar_node_tmini = ExecuteProcess(
