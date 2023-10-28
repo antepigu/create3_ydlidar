@@ -34,7 +34,7 @@ def generate_launch_description():
 
     namespace_argument = DeclareLaunchArgument(
         'namespace', 
-        default_value='r1/',
+        default_value='/',
         description='Robot namespace')
 
     params_file = os.path.join(share_dir, 'params', 'TminiPro.yaml')
