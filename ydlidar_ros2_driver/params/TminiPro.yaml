@@ -7,7 +7,7 @@
       baudrate: 230400
       lidar_type: 1
       device_type: 0
-      sample_rate: 3
+      sample_rate: 5
       intensity_bit: 8
       abnormal_check_count: 4
       fixed_resolution: true
