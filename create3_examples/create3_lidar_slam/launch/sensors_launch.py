@@ -73,7 +73,7 @@ def generate_launch_description():
     )
 
     lidar_node_tmini = ExecuteProcess(
-    	cmd=['ros2', 'launch', 'ydlidar_ros2_driver', 'ydlidar_launch.py', 'namespace:=' + namespace_argument],
+    	cmd=['ros2', 'launch', 'ydlidar_ros2_driver', 'ydlidar_launch.py', 'namespace:='],
     	output='screen',
     )
     
