@@ -14,6 +14,7 @@
 #endif
 
 #include "src/CYdLidar.h"
+#include "src/filters/NoiseFilter.h"
 #include <math.h>
 #include <chrono>
 #include <iostream>
@@ -196,10 +197,12 @@ int main(int argc, char *argv[]) {
   while (ret && rclcpp::ok()) {
 
     //ydlidar::drivers::CompensatorComponent compensator_component = ydlidar::drivers::CompensatorComponent();
+    LaserScan scanNoise;//
     LaserScan scan;//
+    NoiseFilter noiseFilter;
 
-    if (laser.doProcessSimple(scan)) {
-
+    if (laser.doProcessSimple(scanNoise)) {
+      noiseFilter.filter(scanNoise, TYPE_TRIANGLE, TYPE_TRIANGLE, scan);
       auto scan_msg = std::make_shared<sensor_msgs::msg::LaserScan>();
       //LaserScan scan_comp = compensator_component.LaserScanMsgCallback(scan);
 
