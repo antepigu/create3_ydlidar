@@ -30,7 +30,7 @@ def generate_launch_description():
     parameter_file = LaunchConfiguration('params_file')
     node_name = 'ydlidar_ros2_driver_node'
 
-    params_file = os.path.join(share_dir, 'params', 'ydlidar.yaml')
+    params_file = os.path.join(share_dir, 'params', 'TminiPro.yaml')
 
     driver_node = LifecycleNode(package='ydlidar_ros2_driver',
                                 executable='ydlidar_ros2_driver_node',
